@@ -20,18 +20,25 @@ model User {
   id            String    @id @default(cuid())
   name          String
   email         String    @unique
-  emailVerified Boolean
+  emailVerified Boolean   @default(false)
   image         String?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   
+  // Auth relations
   sessions      Session[]
   accounts      Account[]
   
-  // Relations métier
-  farms         Farm[]
+  // Business relations
+  ownedTeams    Team[]    @relation("TeamOwner")
+  userTeams     UserTeam[]
+  createdItems  Item[]    @relation("ItemCreator")
+  createdEquipements Equipement[] @relation("EquipementCreator")
+  createdLots   Lot[]     @relation("LotCreator")
+  createdLifeInfos LifeInfo[] @relation("LifeInfoCreator")
+  createdEvents Event[]   @relation("EventCreator")
 
-  @@map("user") // Recommandé: minuscules pour les noms de tables SQL
+  @@map("users")
 }
 
 model Session {
@@ -46,7 +53,9 @@ model Session {
 
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@map("session")
+  @@index([token])
+  @@index([userId])
+  @@map("sessions")
 }
 
 model Account {
@@ -66,7 +75,9 @@ model Account {
   createdAt             DateTime  @default(now())
   updatedAt             DateTime  @updatedAt
 
-  @@map("account")
+  @@unique([providerId, accountId])
+  @@index([userId])
+  @@map("accounts")
 }
 
 model Verification {
@@ -77,88 +88,279 @@ model Verification {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 
-  @@map("verification")
+  @@index([identifier, value])
+  @@map("verifications")
 }
 
-///////////////////////
-/////   Develop   /////
-///////////////////////
+//////////////////
+/////   Dev  /////
+//////////////////
 
 model Item {
   id          String   @id @default(cuid())
-  order       Int @default(0)
+  order       Int      @default(0)
   name        String
   description String?
   parentId    String?
   
-  //metadata
-  creatById String
-  creatBy User @relation(fields: [creatById], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  // Relations
+  parent      Item?    @relation("ItemHierarchy", fields: [parentId], references: [id], onDelete: Cascade)
+  children    Item[]   @relation("ItemHierarchy")
+  
+  // Metadata
+  createdById String
+  createdBy   User     @relation("ItemCreator", fields: [createdById], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
-  @@map("item")
+  @@index([parentId])
+  @@index([createdById])
+  @@map("items")
 }
 
+//////////////////////
+//////   Teams   /////
+//////////////////////
 
-//////////////////////
-//////   Farms   /////
-//////////////////////
-model Farm {
-  id      String @id @default(cuid())
- order       Int @default(0)
-  name    String
-  ownerId String
-  owner   User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+
+model Team {
+  id        String   @id @default(cuid())
+  order     Int      @default(0)
+  name      String
+  type     String @default(TEAM) // ORGANIZATION | TEAM |   FARM
+  parentId  String?
   
-  //metadata
+  // Relations
+  parent    Team?    @relation("TeamHierarchy", fields: [parentId], references: [id], onDelete: Cascade)
+  children  Team[]   @relation("TeamHierarchy")
+  members   UserTeam[]
+  batiments Batiment[]
+  
+  // Metadata
+  ownerId   String
+  owner     User     @relation("TeamOwner", fields: [ownerId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  // Indexes
+  @@index([parentId])
+  @@index([ownerId])
+  @@index([type])
+  @@map("teams")
+}
 
-@@map("farm")
-  }
+model UserTeam {
+  id        String   @id @default(cuid())
+  teamId    String
+  userId    String
+  role      String   @default("member") // "owner", "admin", "member", "viewer"
+  
+  team      Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  joinedAt  DateTime @default(now())
+  
+  @@unique([teamId, userId])
+  @@index([teamId])
+  @@index([userId])
+  @@map("user_teams")
+}
+
+////////////////////////
+//////   Farming   /////
+////////////////////////
 
 model Batiment {
-  id      String @id @default(cuid())
-  order       Int @default(0)
-  name    String
-  surface Float
+  id       String   @id @default(cuid())
+  order    Int      @default(0)
+  name     String
+  surface  Float
   capacity Int
-  farmId  String
-  farm    Farm   @relation(fields: [farmId], references: [id], onDelete: Cascade)
-  lotIds  Lot[]
-  //metadata
+  teamId   String
+  
+  // Relations
+  team     Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  lots     Lot[]
+  equipements Equipement[]
+  
+  // Metadata
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@map("batiment")
+  @@index([teamId])
+  @@map("batiments")
+}
+
+model Equipement {
+  id                 String   @id @default(cuid())
+  order              Int      @default(0)
+  name               String
+  description        String?
+  legalNorms         String?
+  maintenanceSchedule String?
+  batimentId         String
+  
+  // Relations
+  batiment           Batiment @relation(fields: [batimentId], references: [id], onDelete: Cascade)
+  
+  // Metadata
+  createdById        String
+  createdBy          User     @relation("EquipementCreator", fields: [createdById], references: [id], onDelete: Cascade)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@index([batimentId])
+  @@index([createdById])
+  @@map("equipements")
+}
+
+/////////////////////////
+//////   Breeding   /////
+/////////////////////////
+
+
+model Lot {
+  id              String   @id @default(cuid())
+  order           Int      @default(0)
+  name            String
+  status          String @default(ACTIVE)
+  startDate       DateTime @default(now())
+  actualEndDate   DateTime? // DATE DE FIN RÉELLE
+  plannedEndDate  DateTime? // DATE DE FIN PRÉVUE
+  initialChicks Int // nombre initial de poulet dans le lots
+  initialAge      Int      // en jours au début du lot
+  currentAge      Int      // en jours (calculé: maintenant - startDate + initialAge)
+  
+  // Relations
+  batimentId      String
+  batiment        Batiment @relation(fields: [batimentId], references: [id], onDelete: Cascade)
+  lifeInfoId      String?
+  lifeInfo        LifeInfo? @relation(fields: [lifeInfoId], references: [id], onDelete: SetNull)
+  
+  // Metadata
+  createdById     String
+  createdBy       User     @relation("LotCreator", fields: [createdById], references: [id], onDelete: Cascade)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([batimentId])
+  @@index([status])
+  @@index([startDate])
+  @@index([lifeInfoId])
+  @@map("lots")
+}
+
+model Event{
+ id              String   @id @default(cuid())
+  order           Int      @default(0)
+  enventType    String  // dc| cost | revenue
+  deadCount     Int?
+costfood         number // calculer dab=ns l'app 
+revenueSale number; // calculer dans l'app
+
+
+  // Metadata
+  createdById     String
+  createdBy       User     @relation("LotCreator", fields: [createdById], references: [id], onDelete: Cascade)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+ 
+
+
+}
+
+model LifeInfo { // information journaliere pour un lot donnée
+  id                   String   @id @default(cuid())
+  order                Int       @default(0)
+  jAge                 String // calculer parl'app en fonction de la date de creation du lot et de l'age a la creation
+  AlimType             String
+  feedAmount           Int  // calculer en fonction de la consomation du j  x nb poule (Lot.initialChicks - somme(eventDC))
+
+
+
+// Metadata
+  createdById          String
+  createdBy            User     @relation("LifeInfoCreator", fields: [createdById], references: [id], onDelete: Cascade)
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
 }
 
 
+
 ///////////////////////
-//////   Poules   /////
+/////   Setting   /////
 ///////////////////////
 
-model Lot {
-  id          String   @id @default(cuid())
-  order       Int @default(0)
-  name        String
-  status      String // actif, en pause, terminé
-  dateDebut   DateTime @default(now())
-  dateFin     DateTime? // calculé en fonction de l'âge des poules
-  NombrePoules Int
-  agePoueles  Int // en jours
+model Setting {
+  id              String   @id @default(cuid())
+  teamId          String   @unique
+  team            Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
+
+  // Coûts d'alimentation (par kg)
+  costAlimStarter  Float
+  costAlimGrower   Float
+  costAlimPreLay   Float
+  costAlimLayer    Float
+
+  // Prix de vente des œufs (par œuf)
+  salePriceEggS    Float
+  salePriceEggM    Float
+  salePriceEggL    Float
+  salePriceEggXL   Float
+
+  // Prix de vente des poules (par kg)
+  salePriceLayKg   Float   // Pour les pondeuses en fin de cycle
+  salePriceBoilerKg Float  // Pour les poulets de chair
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@map("settings")
+}
+
+
+
+model environement {// informations gérales et consignes en fonction de l'age et du type d'animal
+  id                   String   @id @default(cuid())
+  order                Int       @default(0)
+  category             String   @default ("LAYING") // LAYING | BROILER
+  phase                String // Phase de croissance : Démarrage, Croissance, Pré-ponte, Mise en ponte, etc.
+  objective            String // Objectif de cette phase (ex: "Préparation à la ponte", "Optimisation du poids")
+  dayStart             Int
+  dayEnd               Int  
+  weekStart            Int
+  weekEnd              Int
+  minTemperature       Float
+  maxTemperature       Float
+  minHumidity          Float
+  maxHumidity          Float
+  minLightHours        Float
+  maxLightHours        Float
+  feedType             String
+  minFeedQuantity      Float
+  maxFeedQuantity      Float
+  minWeight            Float
+  maxWeight            Float
+  minLayingRate        Float
+  maxLayingRate        Float
+  minEggsPerHen        Float
+  maxEggsPerHen        Float
+  minMortalityRate     Float
+  maxMortalityRate     Float
   
-  batimentId  String
-  batiment    Batiment @relation(fields: [batimentId], references: [id], onDelete: Cascade)
-  //metadata
-  creatById String
-  creatBy User @relation(fields: [creatById], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  // Relations
+  lots                 Lot[]
+  
+  // Metadata
+  createdById          String
+  createdBy            User     @relation("LifeInfoCreator", fields: [createdById], references: [id], onDelete: Cascade)
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
 
-  @@map("lot")
+  @@index([category])
+  @@index([phase])
+  @@index([createdById])
+  @@map("breeding")
 }
 
 //////////////////////////
@@ -166,18 +368,24 @@ model Lot {
 //////////////////////////
 
 model Event {
-  id        String   @id @default(cuid())
-  title     String
+  id          String   @id @default(cuid())
+  title       String
   description String?
-  date      DateTime
-  farmId    String
-  farm      Farm     @relation(fields: [farmId], references: [id], onDelete: Cascade)
-   
-  //metadata
+  startDate   DateTime
+  endDate     DateTime?
+  teamId      String
+  
+  // Relations
+  team        Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  
+  // Metadata
   createdById String
-  creatBy User @relation(fields: [createdById], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdBy   User     @relation("EventCreator", fields: [createdById], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
-  @@map("event")
+  @@index([teamId])
+  @@index([startDate])
+  @@index([createdById])
+  @@map("events")
 }

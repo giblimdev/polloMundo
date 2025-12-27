@@ -24,7 +24,7 @@ export default function Logo() {
           </text>
         </svg>
         <span className="text-2xl font-bold bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 text-transparent bg-clip-text">
-          PolloMondo
+          PolloMundo
         </span>
       </div>
     </Link>

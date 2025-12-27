@@ -62,21 +62,9 @@ export default function Page() {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       {/* Navigation principale */}
-      <nav className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <nav className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
-            {/* Logo / Titre */}
-            <button
-              onClick={() => setCurrentView("home")}
-              className="flex items-center gap-2 hover:opacity-80 transition-opacity"
-            >
-              <Home size={24} className="text-primary" />
-              <div>
-                <h1 className="font-bold text-lg">Dev Tools</h1>
-                <p className="text-xs text-muted-foreground">PolloMondo</p>
-              </div>
-            </button>
-
             {/* Navigation Desktop */}
             <div className="hidden md:flex items-center gap-2">
               {navItems.map((item) => (
@@ -175,13 +163,27 @@ function HomePage({
     <div className="container mx-auto px-4 py-12 max-w-6xl">
       {/* Hero Section */}
       <div className="text-center mb-12">
-        <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-primary via-purple-500 to-pink-500 text-transparent bg-clip-text">
+        <h1 className="text-5xl font-bold mb-4 bg-linear-to-r from-primary via-purple-500 to-pink-500 text-transparent bg-clip-text">
           Outils de Développement
         </h1>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
           Documentation complète et outils pour le développement de
           l&apos;application PolloMondo
         </p>
+        <section>
+          <h2></h2>
+          <p>
+            les constantes serons issus des donnee de la db (prix reel) ou de
+            admin/ParamData sinon disponible
+          </p>
+          <p>admin</p>
+          <p>hr resources humaine task</p>
+          <p>public refroupe des donnee generale sur l'élevage</p>
+          <p>
+            user defini L'utilisateur de terrain recolte d'information et
+            realisateur des taches métier
+          </p>
+        </section>
       </div>
 
       {/* Cartes de navigation */}
