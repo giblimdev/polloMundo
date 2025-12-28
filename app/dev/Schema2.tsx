@@ -1,15 +1,136 @@
-generator client {
-  provider = "prisma-client"
-  output   = "../lib/generated/prisma"
+"use client";
+
+import React, { useMemo } from "react";
+import { FileText } from "lucide-react";
+
+// shadcn.io CodeBlock (Shiki)
+import type { BundledLanguage } from "@/components/ui/shadcn-io/code-block";
+import {
+  CodeBlock,
+  CodeBlockBody,
+  CodeBlockContent,
+  CodeBlockCopyButton,
+  CodeBlockFilename,
+  CodeBlockFiles,
+  CodeBlockHeader,
+  CodeBlockItem,
+} from "@/components/ui/shadcn-io/code-block";
+
+type PrismaBlock =
+  | { kind: "header"; title: string; code: string }
+  | { kind: "model"; title: string; modelName: string; code: string };
+
+function splitPrismaSchema(schemaText: string): PrismaBlock[] {
+  const text = schemaText.replace(/\r\n/g, "\n").trim();
+
+  // capture "model Name { ... }" (multiline, closing brace at line start)
+  const modelRegex = /^model\s+([A-Za-z][A-Za-z0-9_]*)\s*\{[\s\S]*?^\}/gm;
+
+  const matches: Array<{
+    name: string;
+    start: number;
+    end: number;
+    code: string;
+  }> = [];
+
+  let m: RegExpExecArray | null;
+  while ((m = modelRegex.exec(text)) !== null) {
+    const full = m[0];
+    matches.push({
+      name: m[1],
+      start: m.index,
+      end: m.index + full.length,
+      code: full.trim(),
+    });
+  }
+
+  const blocks: PrismaBlock[] = [];
+
+  // header = everything before first model (generator/datasource/etc.)
+  const firstStart = matches.length ? matches[0].start : text.length;
+  const header = text.slice(0, firstStart).trim();
+  if (header) {
+    blocks.push({
+      kind: "header",
+      title: "Schema header (generator/datasource)",
+      code: header,
+    });
+  }
+
+  // one block per model
+  for (const mm of matches) {
+    blocks.push({
+      kind: "model",
+      title: `model ${mm.name}`,
+      modelName: mm.name,
+      code: mm.code,
+    });
+  }
+
+  // fallback: if no models matched, show all as header
+  if (!blocks.length) {
+    blocks.push({
+      kind: "header",
+      title: "schema.prisma",
+      code: text,
+    });
+  }
+
+  return blocks;
 }
 
-datasource db {
-  provider = "postgresql"
+function ModelCard({ title, code }: { title: string; code: string }) {
+  const data = useMemo(
+    () => [
+      {
+        // IMPORTANT: CodeBlock uses "language" as the internal selected value + copy source. [page:0]
+        language: title, // unique value per card
+        filename: `${title}.prisma`,
+        code,
+      },
+    ],
+    [title, code]
+  );
+
+  return (
+    <div className="border rounded-lg overflow-hidden bg-card">
+      <div className="px-4 py-3 border-b flex items-center gap-2">
+        <FileText size={16} className="text-muted-foreground" />
+        <div className="font-semibold text-sm">{title}</div>
+      </div>
+
+      <div className="p-3">
+        <CodeBlock data={data} defaultValue={data[0].language}>
+          <CodeBlockHeader>
+            <CodeBlockFiles>
+              {(item) => (
+                <CodeBlockFilename key={item.language} value={item.language}>
+                  {item.filename}
+                </CodeBlockFilename>
+              )}
+            </CodeBlockFiles>
+            <CodeBlockCopyButton />
+          </CodeBlockHeader>
+
+          <CodeBlockBody>
+            {(item) => (
+              <CodeBlockItem key={item.language} value={item.language}>
+                {/* keep real highlighting language = prisma */}
+                <CodeBlockContent language={"prisma" as BundledLanguage}>
+                  {item.code}
+                </CodeBlockContent>
+              </CodeBlockItem>
+            )}
+          </CodeBlockBody>
+        </CodeBlock>
+      </div>
+    </div>
+  );
 }
 
-////////////////////////////
-/////  Modèles Auth   //////
-////////////////////////////
+export default function Svhema2() {
+  const prismaSchema = `
+
 model User {
   id            String   @id @default(cuid())
   name          String
@@ -402,4 +523,32 @@ model CalendarEvent {
   @@index([startDate])
   @@index([createdById])
   @@map("events")
+}
+_HERE`;
+
+  const blocks = useMemo(() => splitPrismaSchema(prismaSchema), [prismaSchema]);
+
+  return (
+    <div className="space-y-4">
+      <div className="border rounded-lg p-4 bg-muted/30">
+        <div className="font-semibold">
+          {blocks.filter((b) => b.kind === "model").length} models détectés
+        </div>
+        <div className="text-sm text-muted-foreground">
+          Un bloc par model (avec highlight + bouton copier).
+        </div>
+      </div>
+
+      {/* Grid: one card per block */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        {blocks.map((b) => (
+          <ModelCard
+            key={`${b.kind}:${b.title}`}
+            title={b.title}
+            code={b.code}
+          />
+        ))}
+      </div>
+    </div>
+  );
 }
