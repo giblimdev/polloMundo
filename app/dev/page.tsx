@@ -14,9 +14,9 @@ import {
   Home,
   ChevronRight,
 } from "lucide-react";
-import Architecture from "./Architecture";
-import Schema from "./Schema2";
-import Scrum from "./Scrum";
+import Architecture from "@/app/dev/Architecture";
+import Schema from "@/app/dev/Schema2";
+import Scrum from "@/app/dev/Scrum";
 
 type View = "home" | "scrum" | "architecture" | "schema";
 
