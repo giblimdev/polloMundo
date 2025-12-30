@@ -247,7 +247,6 @@ export type TeamWhereInput = {
   members?: Prisma.UserTeamListRelationFilter
   batiments?: Prisma.BatimentListRelationFilter
   setting?: Prisma.XOR<Prisma.SettingNullableScalarRelationFilter, Prisma.SettingWhereInput> | null
-  calendarEvents?: Prisma.CalendarEventListRelationFilter
   owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
@@ -265,7 +264,6 @@ export type TeamOrderByWithRelationInput = {
   members?: Prisma.UserTeamOrderByRelationAggregateInput
   batiments?: Prisma.BatimentOrderByRelationAggregateInput
   setting?: Prisma.SettingOrderByWithRelationInput
-  calendarEvents?: Prisma.CalendarEventOrderByRelationAggregateInput
   owner?: Prisma.UserOrderByWithRelationInput
 }
 
@@ -286,7 +284,6 @@ export type TeamWhereUniqueInput = Prisma.AtLeast<{
   members?: Prisma.UserTeamListRelationFilter
   batiments?: Prisma.BatimentListRelationFilter
   setting?: Prisma.XOR<Prisma.SettingNullableScalarRelationFilter, Prisma.SettingWhereInput> | null
-  calendarEvents?: Prisma.CalendarEventListRelationFilter
   owner?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id">
 
@@ -332,7 +329,6 @@ export type TeamCreateInput = {
   members?: Prisma.UserTeamCreateNestedManyWithoutTeamInput
   batiments?: Prisma.BatimentCreateNestedManyWithoutTeamInput
   setting?: Prisma.SettingCreateNestedOneWithoutTeamInput
-  calendarEvents?: Prisma.CalendarEventCreateNestedManyWithoutTeamInput
   owner: Prisma.UserCreateNestedOneWithoutOwnedTeamsInput
 }
 
@@ -349,7 +345,6 @@ export type TeamUncheckedCreateInput = {
   members?: Prisma.UserTeamUncheckedCreateNestedManyWithoutTeamInput
   batiments?: Prisma.BatimentUncheckedCreateNestedManyWithoutTeamInput
   setting?: Prisma.SettingUncheckedCreateNestedOneWithoutTeamInput
-  calendarEvents?: Prisma.CalendarEventUncheckedCreateNestedManyWithoutTeamInput
 }
 
 export type TeamUpdateInput = {
@@ -364,7 +359,6 @@ export type TeamUpdateInput = {
   members?: Prisma.UserTeamUpdateManyWithoutTeamNestedInput
   batiments?: Prisma.BatimentUpdateManyWithoutTeamNestedInput
   setting?: Prisma.SettingUpdateOneWithoutTeamNestedInput
-  calendarEvents?: Prisma.CalendarEventUpdateManyWithoutTeamNestedInput
   owner?: Prisma.UserUpdateOneRequiredWithoutOwnedTeamsNestedInput
 }
 
@@ -381,7 +375,6 @@ export type TeamUncheckedUpdateInput = {
   members?: Prisma.UserTeamUncheckedUpdateManyWithoutTeamNestedInput
   batiments?: Prisma.BatimentUncheckedUpdateManyWithoutTeamNestedInput
   setting?: Prisma.SettingUncheckedUpdateOneWithoutTeamNestedInput
-  calendarEvents?: Prisma.CalendarEventUncheckedUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamCreateManyInput = {
@@ -618,20 +611,6 @@ export type TeamUpdateOneRequiredWithoutSettingNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.TeamUpdateToOneWithWhereWithoutSettingInput, Prisma.TeamUpdateWithoutSettingInput>, Prisma.TeamUncheckedUpdateWithoutSettingInput>
 }
 
-export type TeamCreateNestedOneWithoutCalendarEventsInput = {
-  create?: Prisma.XOR<Prisma.TeamCreateWithoutCalendarEventsInput, Prisma.TeamUncheckedCreateWithoutCalendarEventsInput>
-  connectOrCreate?: Prisma.TeamCreateOrConnectWithoutCalendarEventsInput
-  connect?: Prisma.TeamWhereUniqueInput
-}
-
-export type TeamUpdateOneRequiredWithoutCalendarEventsNestedInput = {
-  create?: Prisma.XOR<Prisma.TeamCreateWithoutCalendarEventsInput, Prisma.TeamUncheckedCreateWithoutCalendarEventsInput>
-  connectOrCreate?: Prisma.TeamCreateOrConnectWithoutCalendarEventsInput
-  upsert?: Prisma.TeamUpsertWithoutCalendarEventsInput
-  connect?: Prisma.TeamWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.TeamUpdateToOneWithWhereWithoutCalendarEventsInput, Prisma.TeamUpdateWithoutCalendarEventsInput>, Prisma.TeamUncheckedUpdateWithoutCalendarEventsInput>
-}
-
 export type TeamCreateWithoutOwnerInput = {
   id?: string
   order?: number
@@ -644,7 +623,6 @@ export type TeamCreateWithoutOwnerInput = {
   members?: Prisma.UserTeamCreateNestedManyWithoutTeamInput
   batiments?: Prisma.BatimentCreateNestedManyWithoutTeamInput
   setting?: Prisma.SettingCreateNestedOneWithoutTeamInput
-  calendarEvents?: Prisma.CalendarEventCreateNestedManyWithoutTeamInput
 }
 
 export type TeamUncheckedCreateWithoutOwnerInput = {
@@ -659,7 +637,6 @@ export type TeamUncheckedCreateWithoutOwnerInput = {
   members?: Prisma.UserTeamUncheckedCreateNestedManyWithoutTeamInput
   batiments?: Prisma.BatimentUncheckedCreateNestedManyWithoutTeamInput
   setting?: Prisma.SettingUncheckedCreateNestedOneWithoutTeamInput
-  calendarEvents?: Prisma.CalendarEventUncheckedCreateNestedManyWithoutTeamInput
 }
 
 export type TeamCreateOrConnectWithoutOwnerInput = {
@@ -713,7 +690,6 @@ export type TeamCreateWithoutChildrenInput = {
   members?: Prisma.UserTeamCreateNestedManyWithoutTeamInput
   batiments?: Prisma.BatimentCreateNestedManyWithoutTeamInput
   setting?: Prisma.SettingCreateNestedOneWithoutTeamInput
-  calendarEvents?: Prisma.CalendarEventCreateNestedManyWithoutTeamInput
   owner: Prisma.UserCreateNestedOneWithoutOwnedTeamsInput
 }
 
@@ -729,7 +705,6 @@ export type TeamUncheckedCreateWithoutChildrenInput = {
   members?: Prisma.UserTeamUncheckedCreateNestedManyWithoutTeamInput
   batiments?: Prisma.BatimentUncheckedCreateNestedManyWithoutTeamInput
   setting?: Prisma.SettingUncheckedCreateNestedOneWithoutTeamInput
-  calendarEvents?: Prisma.CalendarEventUncheckedCreateNestedManyWithoutTeamInput
 }
 
 export type TeamCreateOrConnectWithoutChildrenInput = {
@@ -748,7 +723,6 @@ export type TeamCreateWithoutParentInput = {
   members?: Prisma.UserTeamCreateNestedManyWithoutTeamInput
   batiments?: Prisma.BatimentCreateNestedManyWithoutTeamInput
   setting?: Prisma.SettingCreateNestedOneWithoutTeamInput
-  calendarEvents?: Prisma.CalendarEventCreateNestedManyWithoutTeamInput
   owner: Prisma.UserCreateNestedOneWithoutOwnedTeamsInput
 }
 
@@ -764,7 +738,6 @@ export type TeamUncheckedCreateWithoutParentInput = {
   members?: Prisma.UserTeamUncheckedCreateNestedManyWithoutTeamInput
   batiments?: Prisma.BatimentUncheckedCreateNestedManyWithoutTeamInput
   setting?: Prisma.SettingUncheckedCreateNestedOneWithoutTeamInput
-  calendarEvents?: Prisma.CalendarEventUncheckedCreateNestedManyWithoutTeamInput
 }
 
 export type TeamCreateOrConnectWithoutParentInput = {
@@ -799,7 +772,6 @@ export type TeamUpdateWithoutChildrenInput = {
   members?: Prisma.UserTeamUpdateManyWithoutTeamNestedInput
   batiments?: Prisma.BatimentUpdateManyWithoutTeamNestedInput
   setting?: Prisma.SettingUpdateOneWithoutTeamNestedInput
-  calendarEvents?: Prisma.CalendarEventUpdateManyWithoutTeamNestedInput
   owner?: Prisma.UserUpdateOneRequiredWithoutOwnedTeamsNestedInput
 }
 
@@ -815,7 +787,6 @@ export type TeamUncheckedUpdateWithoutChildrenInput = {
   members?: Prisma.UserTeamUncheckedUpdateManyWithoutTeamNestedInput
   batiments?: Prisma.BatimentUncheckedUpdateManyWithoutTeamNestedInput
   setting?: Prisma.SettingUncheckedUpdateOneWithoutTeamNestedInput
-  calendarEvents?: Prisma.CalendarEventUncheckedUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamUpsertWithWhereUniqueWithoutParentInput = {
@@ -845,7 +816,6 @@ export type TeamCreateWithoutMembersInput = {
   children?: Prisma.TeamCreateNestedManyWithoutParentInput
   batiments?: Prisma.BatimentCreateNestedManyWithoutTeamInput
   setting?: Prisma.SettingCreateNestedOneWithoutTeamInput
-  calendarEvents?: Prisma.CalendarEventCreateNestedManyWithoutTeamInput
   owner: Prisma.UserCreateNestedOneWithoutOwnedTeamsInput
 }
 
@@ -861,7 +831,6 @@ export type TeamUncheckedCreateWithoutMembersInput = {
   children?: Prisma.TeamUncheckedCreateNestedManyWithoutParentInput
   batiments?: Prisma.BatimentUncheckedCreateNestedManyWithoutTeamInput
   setting?: Prisma.SettingUncheckedCreateNestedOneWithoutTeamInput
-  calendarEvents?: Prisma.CalendarEventUncheckedCreateNestedManyWithoutTeamInput
 }
 
 export type TeamCreateOrConnectWithoutMembersInput = {
@@ -891,7 +860,6 @@ export type TeamUpdateWithoutMembersInput = {
   children?: Prisma.TeamUpdateManyWithoutParentNestedInput
   batiments?: Prisma.BatimentUpdateManyWithoutTeamNestedInput
   setting?: Prisma.SettingUpdateOneWithoutTeamNestedInput
-  calendarEvents?: Prisma.CalendarEventUpdateManyWithoutTeamNestedInput
   owner?: Prisma.UserUpdateOneRequiredWithoutOwnedTeamsNestedInput
 }
 
@@ -907,7 +875,6 @@ export type TeamUncheckedUpdateWithoutMembersInput = {
   children?: Prisma.TeamUncheckedUpdateManyWithoutParentNestedInput
   batiments?: Prisma.BatimentUncheckedUpdateManyWithoutTeamNestedInput
   setting?: Prisma.SettingUncheckedUpdateOneWithoutTeamNestedInput
-  calendarEvents?: Prisma.CalendarEventUncheckedUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamCreateWithoutBatimentsInput = {
@@ -921,7 +888,6 @@ export type TeamCreateWithoutBatimentsInput = {
   children?: Prisma.TeamCreateNestedManyWithoutParentInput
   members?: Prisma.UserTeamCreateNestedManyWithoutTeamInput
   setting?: Prisma.SettingCreateNestedOneWithoutTeamInput
-  calendarEvents?: Prisma.CalendarEventCreateNestedManyWithoutTeamInput
   owner: Prisma.UserCreateNestedOneWithoutOwnedTeamsInput
 }
 
@@ -937,7 +903,6 @@ export type TeamUncheckedCreateWithoutBatimentsInput = {
   children?: Prisma.TeamUncheckedCreateNestedManyWithoutParentInput
   members?: Prisma.UserTeamUncheckedCreateNestedManyWithoutTeamInput
   setting?: Prisma.SettingUncheckedCreateNestedOneWithoutTeamInput
-  calendarEvents?: Prisma.CalendarEventUncheckedCreateNestedManyWithoutTeamInput
 }
 
 export type TeamCreateOrConnectWithoutBatimentsInput = {
@@ -967,7 +932,6 @@ export type TeamUpdateWithoutBatimentsInput = {
   children?: Prisma.TeamUpdateManyWithoutParentNestedInput
   members?: Prisma.UserTeamUpdateManyWithoutTeamNestedInput
   setting?: Prisma.SettingUpdateOneWithoutTeamNestedInput
-  calendarEvents?: Prisma.CalendarEventUpdateManyWithoutTeamNestedInput
   owner?: Prisma.UserUpdateOneRequiredWithoutOwnedTeamsNestedInput
 }
 
@@ -983,7 +947,6 @@ export type TeamUncheckedUpdateWithoutBatimentsInput = {
   children?: Prisma.TeamUncheckedUpdateManyWithoutParentNestedInput
   members?: Prisma.UserTeamUncheckedUpdateManyWithoutTeamNestedInput
   setting?: Prisma.SettingUncheckedUpdateOneWithoutTeamNestedInput
-  calendarEvents?: Prisma.CalendarEventUncheckedUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamCreateWithoutSettingInput = {
@@ -997,7 +960,6 @@ export type TeamCreateWithoutSettingInput = {
   children?: Prisma.TeamCreateNestedManyWithoutParentInput
   members?: Prisma.UserTeamCreateNestedManyWithoutTeamInput
   batiments?: Prisma.BatimentCreateNestedManyWithoutTeamInput
-  calendarEvents?: Prisma.CalendarEventCreateNestedManyWithoutTeamInput
   owner: Prisma.UserCreateNestedOneWithoutOwnedTeamsInput
 }
 
@@ -1013,7 +975,6 @@ export type TeamUncheckedCreateWithoutSettingInput = {
   children?: Prisma.TeamUncheckedCreateNestedManyWithoutParentInput
   members?: Prisma.UserTeamUncheckedCreateNestedManyWithoutTeamInput
   batiments?: Prisma.BatimentUncheckedCreateNestedManyWithoutTeamInput
-  calendarEvents?: Prisma.CalendarEventUncheckedCreateNestedManyWithoutTeamInput
 }
 
 export type TeamCreateOrConnectWithoutSettingInput = {
@@ -1043,7 +1004,6 @@ export type TeamUpdateWithoutSettingInput = {
   children?: Prisma.TeamUpdateManyWithoutParentNestedInput
   members?: Prisma.UserTeamUpdateManyWithoutTeamNestedInput
   batiments?: Prisma.BatimentUpdateManyWithoutTeamNestedInput
-  calendarEvents?: Prisma.CalendarEventUpdateManyWithoutTeamNestedInput
   owner?: Prisma.UserUpdateOneRequiredWithoutOwnedTeamsNestedInput
 }
 
@@ -1059,83 +1019,6 @@ export type TeamUncheckedUpdateWithoutSettingInput = {
   children?: Prisma.TeamUncheckedUpdateManyWithoutParentNestedInput
   members?: Prisma.UserTeamUncheckedUpdateManyWithoutTeamNestedInput
   batiments?: Prisma.BatimentUncheckedUpdateManyWithoutTeamNestedInput
-  calendarEvents?: Prisma.CalendarEventUncheckedUpdateManyWithoutTeamNestedInput
-}
-
-export type TeamCreateWithoutCalendarEventsInput = {
-  id?: string
-  order?: number
-  name: string
-  type?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  parent?: Prisma.TeamCreateNestedOneWithoutChildrenInput
-  children?: Prisma.TeamCreateNestedManyWithoutParentInput
-  members?: Prisma.UserTeamCreateNestedManyWithoutTeamInput
-  batiments?: Prisma.BatimentCreateNestedManyWithoutTeamInput
-  setting?: Prisma.SettingCreateNestedOneWithoutTeamInput
-  owner: Prisma.UserCreateNestedOneWithoutOwnedTeamsInput
-}
-
-export type TeamUncheckedCreateWithoutCalendarEventsInput = {
-  id?: string
-  order?: number
-  name: string
-  type?: string
-  parentId?: string | null
-  ownerId: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  children?: Prisma.TeamUncheckedCreateNestedManyWithoutParentInput
-  members?: Prisma.UserTeamUncheckedCreateNestedManyWithoutTeamInput
-  batiments?: Prisma.BatimentUncheckedCreateNestedManyWithoutTeamInput
-  setting?: Prisma.SettingUncheckedCreateNestedOneWithoutTeamInput
-}
-
-export type TeamCreateOrConnectWithoutCalendarEventsInput = {
-  where: Prisma.TeamWhereUniqueInput
-  create: Prisma.XOR<Prisma.TeamCreateWithoutCalendarEventsInput, Prisma.TeamUncheckedCreateWithoutCalendarEventsInput>
-}
-
-export type TeamUpsertWithoutCalendarEventsInput = {
-  update: Prisma.XOR<Prisma.TeamUpdateWithoutCalendarEventsInput, Prisma.TeamUncheckedUpdateWithoutCalendarEventsInput>
-  create: Prisma.XOR<Prisma.TeamCreateWithoutCalendarEventsInput, Prisma.TeamUncheckedCreateWithoutCalendarEventsInput>
-  where?: Prisma.TeamWhereInput
-}
-
-export type TeamUpdateToOneWithWhereWithoutCalendarEventsInput = {
-  where?: Prisma.TeamWhereInput
-  data: Prisma.XOR<Prisma.TeamUpdateWithoutCalendarEventsInput, Prisma.TeamUncheckedUpdateWithoutCalendarEventsInput>
-}
-
-export type TeamUpdateWithoutCalendarEventsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  order?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  parent?: Prisma.TeamUpdateOneWithoutChildrenNestedInput
-  children?: Prisma.TeamUpdateManyWithoutParentNestedInput
-  members?: Prisma.UserTeamUpdateManyWithoutTeamNestedInput
-  batiments?: Prisma.BatimentUpdateManyWithoutTeamNestedInput
-  setting?: Prisma.SettingUpdateOneWithoutTeamNestedInput
-  owner?: Prisma.UserUpdateOneRequiredWithoutOwnedTeamsNestedInput
-}
-
-export type TeamUncheckedUpdateWithoutCalendarEventsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  order?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.StringFieldUpdateOperationsInput | string
-  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  children?: Prisma.TeamUncheckedUpdateManyWithoutParentNestedInput
-  members?: Prisma.UserTeamUncheckedUpdateManyWithoutTeamNestedInput
-  batiments?: Prisma.BatimentUncheckedUpdateManyWithoutTeamNestedInput
-  setting?: Prisma.SettingUncheckedUpdateOneWithoutTeamNestedInput
 }
 
 export type TeamCreateManyOwnerInput = {
@@ -1160,7 +1043,6 @@ export type TeamUpdateWithoutOwnerInput = {
   members?: Prisma.UserTeamUpdateManyWithoutTeamNestedInput
   batiments?: Prisma.BatimentUpdateManyWithoutTeamNestedInput
   setting?: Prisma.SettingUpdateOneWithoutTeamNestedInput
-  calendarEvents?: Prisma.CalendarEventUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamUncheckedUpdateWithoutOwnerInput = {
@@ -1175,7 +1057,6 @@ export type TeamUncheckedUpdateWithoutOwnerInput = {
   members?: Prisma.UserTeamUncheckedUpdateManyWithoutTeamNestedInput
   batiments?: Prisma.BatimentUncheckedUpdateManyWithoutTeamNestedInput
   setting?: Prisma.SettingUncheckedUpdateOneWithoutTeamNestedInput
-  calendarEvents?: Prisma.CalendarEventUncheckedUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamUncheckedUpdateManyWithoutOwnerInput = {
@@ -1209,7 +1090,6 @@ export type TeamUpdateWithoutParentInput = {
   members?: Prisma.UserTeamUpdateManyWithoutTeamNestedInput
   batiments?: Prisma.BatimentUpdateManyWithoutTeamNestedInput
   setting?: Prisma.SettingUpdateOneWithoutTeamNestedInput
-  calendarEvents?: Prisma.CalendarEventUpdateManyWithoutTeamNestedInput
   owner?: Prisma.UserUpdateOneRequiredWithoutOwnedTeamsNestedInput
 }
 
@@ -1225,7 +1105,6 @@ export type TeamUncheckedUpdateWithoutParentInput = {
   members?: Prisma.UserTeamUncheckedUpdateManyWithoutTeamNestedInput
   batiments?: Prisma.BatimentUncheckedUpdateManyWithoutTeamNestedInput
   setting?: Prisma.SettingUncheckedUpdateOneWithoutTeamNestedInput
-  calendarEvents?: Prisma.CalendarEventUncheckedUpdateManyWithoutTeamNestedInput
 }
 
 export type TeamUncheckedUpdateManyWithoutParentInput = {
@@ -1247,14 +1126,12 @@ export type TeamCountOutputType = {
   children: number
   members: number
   batiments: number
-  calendarEvents: number
 }
 
 export type TeamCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   children?: boolean | TeamCountOutputTypeCountChildrenArgs
   members?: boolean | TeamCountOutputTypeCountMembersArgs
   batiments?: boolean | TeamCountOutputTypeCountBatimentsArgs
-  calendarEvents?: boolean | TeamCountOutputTypeCountCalendarEventsArgs
 }
 
 /**
@@ -1288,13 +1165,6 @@ export type TeamCountOutputTypeCountBatimentsArgs<ExtArgs extends runtime.Types.
   where?: Prisma.BatimentWhereInput
 }
 
-/**
- * TeamCountOutputType without action
- */
-export type TeamCountOutputTypeCountCalendarEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.CalendarEventWhereInput
-}
-
 
 export type TeamSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1310,7 +1180,6 @@ export type TeamSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   members?: boolean | Prisma.Team$membersArgs<ExtArgs>
   batiments?: boolean | Prisma.Team$batimentsArgs<ExtArgs>
   setting?: boolean | Prisma.Team$settingArgs<ExtArgs>
-  calendarEvents?: boolean | Prisma.Team$calendarEventsArgs<ExtArgs>
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.TeamCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["team"]>
@@ -1359,7 +1228,6 @@ export type TeamInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   members?: boolean | Prisma.Team$membersArgs<ExtArgs>
   batiments?: boolean | Prisma.Team$batimentsArgs<ExtArgs>
   setting?: boolean | Prisma.Team$settingArgs<ExtArgs>
-  calendarEvents?: boolean | Prisma.Team$calendarEventsArgs<ExtArgs>
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.TeamCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -1380,7 +1248,6 @@ export type $TeamPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     members: Prisma.$UserTeamPayload<ExtArgs>[]
     batiments: Prisma.$BatimentPayload<ExtArgs>[]
     setting: Prisma.$SettingPayload<ExtArgs> | null
-    calendarEvents: Prisma.$CalendarEventPayload<ExtArgs>[]
     owner: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1791,7 +1658,6 @@ export interface Prisma__TeamClient<T, Null = never, ExtArgs extends runtime.Typ
   members<T extends Prisma.Team$membersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Team$membersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserTeamPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   batiments<T extends Prisma.Team$batimentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Team$batimentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BatimentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   setting<T extends Prisma.Team$settingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Team$settingArgs<ExtArgs>>): Prisma.Prisma__SettingClient<runtime.Types.Result.GetResult<Prisma.$SettingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  calendarEvents<T extends Prisma.Team$calendarEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Team$calendarEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CalendarEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   owner<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2333,30 +2199,6 @@ export type Team$settingArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   include?: Prisma.SettingInclude<ExtArgs> | null
   where?: Prisma.SettingWhereInput
-}
-
-/**
- * Team.calendarEvents
- */
-export type Team$calendarEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the CalendarEvent
-   */
-  select?: Prisma.CalendarEventSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the CalendarEvent
-   */
-  omit?: Prisma.CalendarEventOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.CalendarEventInclude<ExtArgs> | null
-  where?: Prisma.CalendarEventWhereInput
-  orderBy?: Prisma.CalendarEventOrderByWithRelationInput | Prisma.CalendarEventOrderByWithRelationInput[]
-  cursor?: Prisma.CalendarEventWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.CalendarEventScalarFieldEnum | Prisma.CalendarEventScalarFieldEnum[]
 }
 
 /**

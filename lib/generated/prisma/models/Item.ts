@@ -39,6 +39,7 @@ export type ItemSumAggregateOutputType = {
 export type ItemMinAggregateOutputType = {
   id: string | null
   order: number | null
+  TypeItem: string | null
   name: string | null
   description: string | null
   parentId: string | null
@@ -50,6 +51,7 @@ export type ItemMinAggregateOutputType = {
 export type ItemMaxAggregateOutputType = {
   id: string | null
   order: number | null
+  TypeItem: string | null
   name: string | null
   description: string | null
   parentId: string | null
@@ -61,6 +63,7 @@ export type ItemMaxAggregateOutputType = {
 export type ItemCountAggregateOutputType = {
   id: number
   order: number
+  TypeItem: number
   name: number
   description: number
   parentId: number
@@ -82,6 +85,7 @@ export type ItemSumAggregateInputType = {
 export type ItemMinAggregateInputType = {
   id?: true
   order?: true
+  TypeItem?: true
   name?: true
   description?: true
   parentId?: true
@@ -93,6 +97,7 @@ export type ItemMinAggregateInputType = {
 export type ItemMaxAggregateInputType = {
   id?: true
   order?: true
+  TypeItem?: true
   name?: true
   description?: true
   parentId?: true
@@ -104,6 +109,7 @@ export type ItemMaxAggregateInputType = {
 export type ItemCountAggregateInputType = {
   id?: true
   order?: true
+  TypeItem?: true
   name?: true
   description?: true
   parentId?: true
@@ -202,6 +208,7 @@ export type ItemGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type ItemGroupByOutputType = {
   id: string
   order: number
+  TypeItem: string
   name: string
   description: string | null
   parentId: string | null
@@ -236,6 +243,7 @@ export type ItemWhereInput = {
   NOT?: Prisma.ItemWhereInput | Prisma.ItemWhereInput[]
   id?: Prisma.StringFilter<"Item"> | string
   order?: Prisma.IntFilter<"Item"> | number
+  TypeItem?: Prisma.StringFilter<"Item"> | string
   name?: Prisma.StringFilter<"Item"> | string
   description?: Prisma.StringNullableFilter<"Item"> | string | null
   parentId?: Prisma.StringNullableFilter<"Item"> | string | null
@@ -250,6 +258,7 @@ export type ItemWhereInput = {
 export type ItemOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   order?: Prisma.SortOrder
+  TypeItem?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   parentId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -267,6 +276,7 @@ export type ItemWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.ItemWhereInput[]
   NOT?: Prisma.ItemWhereInput | Prisma.ItemWhereInput[]
   order?: Prisma.IntFilter<"Item"> | number
+  TypeItem?: Prisma.StringFilter<"Item"> | string
   name?: Prisma.StringFilter<"Item"> | string
   description?: Prisma.StringNullableFilter<"Item"> | string | null
   parentId?: Prisma.StringNullableFilter<"Item"> | string | null
@@ -281,6 +291,7 @@ export type ItemWhereUniqueInput = Prisma.AtLeast<{
 export type ItemOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   order?: Prisma.SortOrder
+  TypeItem?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   parentId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -300,6 +311,7 @@ export type ItemScalarWhereWithAggregatesInput = {
   NOT?: Prisma.ItemScalarWhereWithAggregatesInput | Prisma.ItemScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Item"> | string
   order?: Prisma.IntWithAggregatesFilter<"Item"> | number
+  TypeItem?: Prisma.StringWithAggregatesFilter<"Item"> | string
   name?: Prisma.StringWithAggregatesFilter<"Item"> | string
   description?: Prisma.StringNullableWithAggregatesFilter<"Item"> | string | null
   parentId?: Prisma.StringNullableWithAggregatesFilter<"Item"> | string | null
@@ -311,6 +323,7 @@ export type ItemScalarWhereWithAggregatesInput = {
 export type ItemCreateInput = {
   id?: string
   order?: number
+  TypeItem?: string
   name: string
   description?: string | null
   createdAt?: Date | string
@@ -323,6 +336,7 @@ export type ItemCreateInput = {
 export type ItemUncheckedCreateInput = {
   id?: string
   order?: number
+  TypeItem?: string
   name: string
   description?: string | null
   parentId?: string | null
@@ -335,6 +349,7 @@ export type ItemUncheckedCreateInput = {
 export type ItemUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
+  TypeItem?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -347,6 +362,7 @@ export type ItemUpdateInput = {
 export type ItemUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
+  TypeItem?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -359,6 +375,7 @@ export type ItemUncheckedUpdateInput = {
 export type ItemCreateManyInput = {
   id?: string
   order?: number
+  TypeItem?: string
   name: string
   description?: string | null
   parentId?: string | null
@@ -370,6 +387,7 @@ export type ItemCreateManyInput = {
 export type ItemUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
+  TypeItem?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -379,6 +397,7 @@ export type ItemUpdateManyMutationInput = {
 export type ItemUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
+  TypeItem?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -405,6 +424,7 @@ export type ItemNullableScalarRelationFilter = {
 export type ItemCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   order?: Prisma.SortOrder
+  TypeItem?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
   parentId?: Prisma.SortOrder
@@ -420,6 +440,7 @@ export type ItemAvgOrderByAggregateInput = {
 export type ItemMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   order?: Prisma.SortOrder
+  TypeItem?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
   parentId?: Prisma.SortOrder
@@ -431,6 +452,7 @@ export type ItemMaxOrderByAggregateInput = {
 export type ItemMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   order?: Prisma.SortOrder
+  TypeItem?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
   parentId?: Prisma.SortOrder
@@ -554,6 +576,7 @@ export type ItemUncheckedUpdateManyWithoutParentNestedInput = {
 export type ItemCreateWithoutCreatedByInput = {
   id?: string
   order?: number
+  TypeItem?: string
   name: string
   description?: string | null
   createdAt?: Date | string
@@ -565,6 +588,7 @@ export type ItemCreateWithoutCreatedByInput = {
 export type ItemUncheckedCreateWithoutCreatedByInput = {
   id?: string
   order?: number
+  TypeItem?: string
   name: string
   description?: string | null
   parentId?: string | null
@@ -605,6 +629,7 @@ export type ItemScalarWhereInput = {
   NOT?: Prisma.ItemScalarWhereInput | Prisma.ItemScalarWhereInput[]
   id?: Prisma.StringFilter<"Item"> | string
   order?: Prisma.IntFilter<"Item"> | number
+  TypeItem?: Prisma.StringFilter<"Item"> | string
   name?: Prisma.StringFilter<"Item"> | string
   description?: Prisma.StringNullableFilter<"Item"> | string | null
   parentId?: Prisma.StringNullableFilter<"Item"> | string | null
@@ -616,6 +641,7 @@ export type ItemScalarWhereInput = {
 export type ItemCreateWithoutChildrenInput = {
   id?: string
   order?: number
+  TypeItem?: string
   name: string
   description?: string | null
   createdAt?: Date | string
@@ -627,6 +653,7 @@ export type ItemCreateWithoutChildrenInput = {
 export type ItemUncheckedCreateWithoutChildrenInput = {
   id?: string
   order?: number
+  TypeItem?: string
   name: string
   description?: string | null
   parentId?: string | null
@@ -643,6 +670,7 @@ export type ItemCreateOrConnectWithoutChildrenInput = {
 export type ItemCreateWithoutParentInput = {
   id?: string
   order?: number
+  TypeItem?: string
   name: string
   description?: string | null
   createdAt?: Date | string
@@ -654,6 +682,7 @@ export type ItemCreateWithoutParentInput = {
 export type ItemUncheckedCreateWithoutParentInput = {
   id?: string
   order?: number
+  TypeItem?: string
   name: string
   description?: string | null
   createdById: string
@@ -686,6 +715,7 @@ export type ItemUpdateToOneWithWhereWithoutChildrenInput = {
 export type ItemUpdateWithoutChildrenInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
+  TypeItem?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -697,6 +727,7 @@ export type ItemUpdateWithoutChildrenInput = {
 export type ItemUncheckedUpdateWithoutChildrenInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
+  TypeItem?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -724,6 +755,7 @@ export type ItemUpdateManyWithWhereWithoutParentInput = {
 export type ItemCreateManyCreatedByInput = {
   id?: string
   order?: number
+  TypeItem?: string
   name: string
   description?: string | null
   parentId?: string | null
@@ -734,6 +766,7 @@ export type ItemCreateManyCreatedByInput = {
 export type ItemUpdateWithoutCreatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
+  TypeItem?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -745,6 +778,7 @@ export type ItemUpdateWithoutCreatedByInput = {
 export type ItemUncheckedUpdateWithoutCreatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
+  TypeItem?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -756,6 +790,7 @@ export type ItemUncheckedUpdateWithoutCreatedByInput = {
 export type ItemUncheckedUpdateManyWithoutCreatedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
+  TypeItem?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -766,6 +801,7 @@ export type ItemUncheckedUpdateManyWithoutCreatedByInput = {
 export type ItemCreateManyParentInput = {
   id?: string
   order?: number
+  TypeItem?: string
   name: string
   description?: string | null
   createdById: string
@@ -776,6 +812,7 @@ export type ItemCreateManyParentInput = {
 export type ItemUpdateWithoutParentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
+  TypeItem?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -787,6 +824,7 @@ export type ItemUpdateWithoutParentInput = {
 export type ItemUncheckedUpdateWithoutParentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
+  TypeItem?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
@@ -798,6 +836,7 @@ export type ItemUncheckedUpdateWithoutParentInput = {
 export type ItemUncheckedUpdateManyWithoutParentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
+  TypeItem?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.StringFieldUpdateOperationsInput | string
@@ -839,6 +878,7 @@ export type ItemCountOutputTypeCountChildrenArgs<ExtArgs extends runtime.Types.E
 export type ItemSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   order?: boolean
+  TypeItem?: boolean
   name?: boolean
   description?: boolean
   parentId?: boolean
@@ -854,6 +894,7 @@ export type ItemSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
 export type ItemSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   order?: boolean
+  TypeItem?: boolean
   name?: boolean
   description?: boolean
   parentId?: boolean
@@ -867,6 +908,7 @@ export type ItemSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
 export type ItemSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   order?: boolean
+  TypeItem?: boolean
   name?: boolean
   description?: boolean
   parentId?: boolean
@@ -880,6 +922,7 @@ export type ItemSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
 export type ItemSelectScalar = {
   id?: boolean
   order?: boolean
+  TypeItem?: boolean
   name?: boolean
   description?: boolean
   parentId?: boolean
@@ -888,7 +931,7 @@ export type ItemSelectScalar = {
   updatedAt?: boolean
 }
 
-export type ItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "order" | "name" | "description" | "parentId" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["item"]>
+export type ItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "order" | "TypeItem" | "name" | "description" | "parentId" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["item"]>
 export type ItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   parent?: boolean | Prisma.Item$parentArgs<ExtArgs>
   children?: boolean | Prisma.Item$childrenArgs<ExtArgs>
@@ -914,6 +957,7 @@ export type $ItemPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     order: number
+    TypeItem: string
     name: string
     description: string | null
     parentId: string | null
@@ -1348,6 +1392,7 @@ export interface Prisma__ItemClient<T, Null = never, ExtArgs extends runtime.Typ
 export interface ItemFieldRefs {
   readonly id: Prisma.FieldRef<"Item", 'String'>
   readonly order: Prisma.FieldRef<"Item", 'Int'>
+  readonly TypeItem: Prisma.FieldRef<"Item", 'String'>
   readonly name: Prisma.FieldRef<"Item", 'String'>
   readonly description: Prisma.FieldRef<"Item", 'String'>
   readonly parentId: Prisma.FieldRef<"Item", 'String'>

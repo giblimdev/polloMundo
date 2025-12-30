@@ -60,12 +60,14 @@ export const ModelName = {
   UserTeam: 'UserTeam',
   Batiment: 'Batiment',
   Equipement: 'Equipement',
+  LifeCircle: 'LifeCircle',
+  Phase: 'Phase',
+  Event: 'Event',
+  Tasks: 'Tasks',
+  BreedingParams: 'BreedingParams',
   Lot: 'Lot',
-  LotEvent: 'LotEvent',
-  LifeInfo: 'LifeInfo',
   Setting: 'Setting',
-  environement: 'environement',
-  CalendarEvent: 'CalendarEvent'
+  Calendar: 'Calendar'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -145,6 +147,7 @@ export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[k
 export const ItemScalarFieldEnum = {
   id: 'id',
   order: 'order',
+  TypeItem: 'TypeItem',
   name: 'name',
   description: 'description',
   parentId: 'parentId',
@@ -211,6 +214,93 @@ export const EquipementScalarFieldEnum = {
 export type EquipementScalarFieldEnum = (typeof EquipementScalarFieldEnum)[keyof typeof EquipementScalarFieldEnum]
 
 
+export const LifeCircleScalarFieldEnum = {
+  id: 'id',
+  order: 'order',
+  type: 'type'
+} as const
+
+export type LifeCircleScalarFieldEnum = (typeof LifeCircleScalarFieldEnum)[keyof typeof LifeCircleScalarFieldEnum]
+
+
+export const PhaseScalarFieldEnum = {
+  id: 'id',
+  order: 'order',
+  name: 'name',
+  weekStart: 'weekStart',
+  weekEnd: 'weekEnd',
+  lifeCircleId: 'lifeCircleId',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PhaseScalarFieldEnum = (typeof PhaseScalarFieldEnum)[keyof typeof PhaseScalarFieldEnum]
+
+
+export const EventScalarFieldEnum = {
+  id: 'id',
+  source: 'source',
+  predictedId: 'predictedId',
+  order: 'order',
+  name: 'name',
+  day: 'day',
+  currentAge: 'currentAge',
+  Cheptel: 'Cheptel',
+  weightGrams: 'weightGrams',
+  feedAmount: 'feedAmount',
+  nbEggs: 'nbEggs',
+  nbeggS: 'nbeggS',
+  nbeggM: 'nbeggM',
+  nbeggL: 'nbeggL',
+  nbeggXL: 'nbeggXL',
+  phaseId: 'phaseId',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EventScalarFieldEnum = (typeof EventScalarFieldEnum)[keyof typeof EventScalarFieldEnum]
+
+
+export const TasksScalarFieldEnum = {
+  id: 'id',
+  source: 'source',
+  predictedId: 'predictedId',
+  order: 'order',
+  name: 'name',
+  day: 'day',
+  currentAge: 'currentAge',
+  taskList: 'taskList',
+  phaseId: 'phaseId',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TasksScalarFieldEnum = (typeof TasksScalarFieldEnum)[keyof typeof TasksScalarFieldEnum]
+
+
+export const BreedingParamsScalarFieldEnum = {
+  id: 'id',
+  source: 'source',
+  predictedId: 'predictedId',
+  order: 'order',
+  day: 'day',
+  currentAge: 'currentAge',
+  temperature: 'temperature',
+  humidity: 'humidity',
+  lightHours: 'lightHours',
+  lightIntensity: 'lightIntensity',
+  phaseId: 'phaseId',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BreedingParamsScalarFieldEnum = (typeof BreedingParamsScalarFieldEnum)[keyof typeof BreedingParamsScalarFieldEnum]
+
+
 export const LotScalarFieldEnum = {
   id: 'id',
   order: 'order',
@@ -221,46 +311,13 @@ export const LotScalarFieldEnum = {
   plannedEndDate: 'plannedEndDate',
   initialChicks: 'initialChicks',
   initialAge: 'initialAge',
-  currentAge: 'currentAge',
   batimentId: 'batimentId',
-  environementId: 'environementId',
   createdById: 'createdById',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type LotScalarFieldEnum = (typeof LotScalarFieldEnum)[keyof typeof LotScalarFieldEnum]
-
-
-export const LotEventScalarFieldEnum = {
-  id: 'id',
-  order: 'order',
-  eventType: 'eventType',
-  deadCount: 'deadCount',
-  costfood: 'costfood',
-  revenueSale: 'revenueSale',
-  lotId: 'lotId',
-  createdById: 'createdById',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type LotEventScalarFieldEnum = (typeof LotEventScalarFieldEnum)[keyof typeof LotEventScalarFieldEnum]
-
-
-export const LifeInfoScalarFieldEnum = {
-  id: 'id',
-  order: 'order',
-  jAge: 'jAge',
-  AlimType: 'AlimType',
-  feedAmount: 'feedAmount',
-  lotId: 'lotId',
-  createdById: 'createdById',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type LifeInfoScalarFieldEnum = (typeof LifeInfoScalarFieldEnum)[keyof typeof LifeInfoScalarFieldEnum]
 
 
 export const SettingScalarFieldEnum = {
@@ -276,6 +333,7 @@ export const SettingScalarFieldEnum = {
   salePriceEggXL: 'salePriceEggXL',
   salePriceLayKg: 'salePriceLayKg',
   salePriceBoilerKg: 'salePriceBoilerKg',
+  createdById: 'createdById',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -283,54 +341,16 @@ export const SettingScalarFieldEnum = {
 export type SettingScalarFieldEnum = (typeof SettingScalarFieldEnum)[keyof typeof SettingScalarFieldEnum]
 
 
-export const EnvironementScalarFieldEnum = {
+export const CalendarScalarFieldEnum = {
   id: 'id',
-  order: 'order',
-  category: 'category',
-  phase: 'phase',
-  objective: 'objective',
-  dayStart: 'dayStart',
-  dayEnd: 'dayEnd',
-  weekStart: 'weekStart',
-  weekEnd: 'weekEnd',
-  minTemperature: 'minTemperature',
-  maxTemperature: 'maxTemperature',
-  minHumidity: 'minHumidity',
-  maxHumidity: 'maxHumidity',
-  minLightHours: 'minLightHours',
-  maxLightHours: 'maxLightHours',
-  feedType: 'feedType',
-  minFeedQuantity: 'minFeedQuantity',
-  maxFeedQuantity: 'maxFeedQuantity',
-  minWeight: 'minWeight',
-  maxWeight: 'maxWeight',
-  minLayingRate: 'minLayingRate',
-  maxLayingRate: 'maxLayingRate',
-  minEggsPerHen: 'minEggsPerHen',
-  maxEggsPerHen: 'maxEggsPerHen',
-  minMortalityRate: 'minMortalityRate',
-  maxMortalityRate: 'maxMortalityRate',
-  createdById: 'createdById',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type EnvironementScalarFieldEnum = (typeof EnvironementScalarFieldEnum)[keyof typeof EnvironementScalarFieldEnum]
-
-
-export const CalendarEventScalarFieldEnum = {
-  id: 'id',
+  date: 'date',
   title: 'title',
   description: 'description',
-  startDate: 'startDate',
-  endDate: 'endDate',
-  teamId: 'teamId',
-  createdById: 'createdById',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
-export type CalendarEventScalarFieldEnum = (typeof CalendarEventScalarFieldEnum)[keyof typeof CalendarEventScalarFieldEnum]
+export type CalendarScalarFieldEnum = (typeof CalendarScalarFieldEnum)[keyof typeof CalendarScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -339,6 +359,13 @@ export const SortOrder = {
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const JsonNullValueInput = {
+  JsonNull: 'JsonNull'
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {
@@ -355,4 +382,13 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: 'DbNull',
+  JsonNull: 'JsonNull',
+  AnyNull: 'AnyNull'
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 

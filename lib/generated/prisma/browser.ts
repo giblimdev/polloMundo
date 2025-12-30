@@ -71,22 +71,35 @@ export type Batiment = Prisma.BatimentModel
  */
 export type Equipement = Prisma.EquipementModel
 /**
+ * Model LifeCircle
+ * 
+ */
+export type LifeCircle = Prisma.LifeCircleModel
+/**
+ * Model Phase
+ * 
+ */
+export type Phase = Prisma.PhaseModel
+/**
+ * Model Event
+ * 
+ */
+export type Event = Prisma.EventModel
+/**
+ * Model Tasks
+ * 
+ */
+export type Tasks = Prisma.TasksModel
+/**
+ * Model BreedingParams
+ * 
+ */
+export type BreedingParams = Prisma.BreedingParamsModel
+/**
  * Model Lot
- * //////////////////////
- * ///   Breeding   /////
- * //////////////////////
+ * 
  */
 export type Lot = Prisma.LotModel
-/**
- * Model LotEvent
- * 
- */
-export type LotEvent = Prisma.LotEventModel
-/**
- * Model LifeInfo
- * 
- */
-export type LifeInfo = Prisma.LifeInfoModel
 /**
  * Model Setting
  * ////////////////////
@@ -95,14 +108,9 @@ export type LifeInfo = Prisma.LifeInfoModel
  */
 export type Setting = Prisma.SettingModel
 /**
- * Model environement
- * 
- */
-export type environement = Prisma.environementModel
-/**
- * Model CalendarEvent
+ * Model Calendar
  * ///////////////////////
  * //   Calendrier   /////
  * ///////////////////////
  */
-export type CalendarEvent = Prisma.CalendarEventModel
+export type Calendar = Prisma.CalendarModel
