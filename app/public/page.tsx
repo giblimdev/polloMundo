@@ -1,220 +1,317 @@
-import GoHome from "@/components/common/GoHome";
-import Link from "next/link";
+// src/components/navigation/PublicNav.tsx
 import React from "react";
+import Link from "next/link";
+import {
+  Egg,
+  Home,
+  Warehouse,
+  ShoppingBag,
+  Scale,
+  FileText,
+  HelpCircle,
+  BookOpen,
+  ClipboardList,
+  Wrench,
+  UtensilsCrossed,
+  Building2,
+  Factory,
+  Mail,
+} from "lucide-react";
 
-type NavItem = {
+// --------------------
+// Types
+// --------------------
+interface NavItem {
   title: string;
   href: string;
-  description: string;
-};
+  description?: string;
+  icon?: any;
+}
 
-type NavCategory = {
+interface NavCategory {
   title: string;
+  emoji?: string;
   description: string;
+  colorBack: string;
   items: NavItem[];
-};
+}
 
-const PUBLIC_PAGES: NavCategory[] = [
+// --------------------
+// Données : PolloMundo – Guide des Catégories
+// --------------------
+export const PUBLIC_PAGES: NavCategory[] = [
   {
     title: "Élevage",
-    description: "Tout sur la conduite des pondeuses.",
+    emoji: "🐔",
+    colorBack: "bg-yellow-50",
+    description:
+      "L’élevage des poules pondeuses est au cœur de la production chez PolloMundo. Cette section vous accompagne à chaque étape : du cycle de vie des poules aux actions clés pour garantir leur santé et leur productivité.",
     items: [
       {
         title: "Guide d’élevage",
         href: "/public/guide-elevage",
-        description: "Cycle de vie, étapes, actions clés.",
+        description:
+          "Cycle de vie, étapes essentielles et actions clés pour la productivité.",
+        icon: BookOpen,
       },
       {
         title: "Conduite en lots",
         href: "/public/conduite-lots",
-        description: "Bandes, vide sanitaire, continuité de production.",
+        description:
+          "Gestion des bandes, vide sanitaire et continuité de production.",
+        icon: ClipboardList,
+      },
+      {
+        title: "Qualité de l’élevage",
+        href: "/public/qualite-elevage",
+        description:
+          "Quarantaine, traçabilité, documents et calendrier des lots.",
+        icon: FileText,
       },
       {
         title: "Alimentation",
         href: "/public/alimentation",
-        description: "Phases, eau, stockage, distribution.",
+        description:
+          "Phases alimentaires, gestion de l’eau, stockage et distribution.",
+        icon: Egg,
+      },
+      {
+        title: "Indicateurs de performance (KPI)",
+        href: "/public/kpi-elevage",
+        description: "Suivi des performances et ratios d’élevage.",
+        icon: Scale,
       },
     ],
   },
   {
     title: "Infrastructures",
-    description: "Bâtiments, réseaux et équipements.",
+    emoji: "🏠",
+    colorBack: "bg-blue-50",
+    description:
+      "Les infrastructures sont la base d’un élevage performant : bâtiments, réseaux, électricité et équipements essentiels pour le confort et la sécurité.",
     items: [
       {
         title: "Bâtiments & installations",
         href: "/public/installations",
-        description: "Pièces, usages, eau, électricité.",
+        description:
+          "Pièces, usages, paramètres environnementaux et réseaux (eau, électricité, énergie).",
+        icon: Building2,
       },
       {
-        title: "Matériel",
+        title: "Aménagement & densité",
+        href: "/public/amenagements",
+        description:
+          "Gestion des espaces, enrichissements, perchoirs et nids de ponte.",
+        icon: Factory,
+      },
+      {
+        title: "Matériel & équipements",
         href: "/public/materiel",
-        description: "Équipements et consommables.",
+        description:
+          "Nids, perchoirs, abreuvoirs, mangeoires, références et entretien.",
+        icon: Wrench,
+      },
+      {
+        title: "Maintenance & sécurité",
+        href: "/public/maintenance",
+        description: "Protocoles d’entretien et de prévention des risques.",
+        icon: ClipboardList,
+      },
+    ],
+  },
+  {
+    title: "Production",
+    emoji: "🥚",
+    colorBack: "bg-amber-50",
+    description:
+      "Tout savoir sur les œufs : catégories, collecte, conditionnement, conservation et valorisation des sous-produits.",
+    items: [
+      {
+        title: "Catégories d’œufs",
+        href: "/public/categories-oeufs",
+        description:
+          "Normes de classification (A/B), calibre, poids et critères de tri.",
+        icon: Egg,
+      },
+      {
+        title: "Collecte & tri",
+        href: "/public/collecte-tri",
+        description:
+          "Méthodes de collecte, classification et rendements par catégorie.",
+        icon: ClipboardList,
+      },
+      {
+        title: "Conditionnement & conservation",
+        href: "/public/conditionnement",
+        description:
+          "Traçabilité, emballages, hygiène et durée de conservation.",
+        icon: Warehouse,
+      },
+      {
+        title: "Valorisation des sous-produits",
+        href: "/public/valorisation",
+        description:
+          "Engrais, compost, vente des poules de réforme et autres usages.",
+        icon: UtensilsCrossed,
+      },
+      {
+        title: "Qualité & traçabilité",
+        href: "/public/qualite-production",
+        description: "Procédures HACCP, registres et contrôles qualité.",
+        icon: Scale,
       },
     ],
   },
   {
     title: "Vente",
-    description: "Commercialisation et valorisation.",
+    emoji: "💰",
+    colorBack: "bg-green-50",
+    description:
+      "La vente et la valorisation des produits avicoles sont essentielles à la rentabilité. Stratégies marketing, canaux de distribution, tarification et recettes inclus.",
     items: [
       {
         title: "Vente & marketing",
         href: "/public/vente-marketing",
-        description: "Canaux, prix, com, planning.",
+        description:
+          "Canaux de vente, stratégie, communication et planification.",
+        icon: ShoppingBag,
+      },
+      {
+        title: "Politique tarifaire",
+        href: "/public/tarification",
+        description: "Méthodes de fixation des prix et marges.",
+        icon: Scale,
       },
       {
         title: "Recettes",
         href: "/public/recettes",
-        description: "Idées cuisine pour valoriser.",
+        description:
+          "Idées pour valoriser les produits et réduire le gaspillage.",
+        icon: UtensilsCrossed,
       },
     ],
   },
   {
     title: "Réglementation",
-    description: "Normes et documents.",
+    emoji: "📜",
+    colorBack: "bg-red-50",
+    description:
+      "Respecter les normes est indispensable pour garantir qualité et sécurité. Retrouvez ici les règles, obligations et modèles de documents utiles.",
     items: [
       {
-        title: "Réglementation",
+        title: "Normes & obligations",
         href: "/public/reglementation",
-        description: "Biosécurité, obligations, checklists.",
+        description:
+          "Biosécurité, hygiène, bien-être animal et obligations légales.",
+        icon: Scale,
+      },
+      {
+        title: "Documents & registres",
+        href: "/public/documents-registres",
+        description:
+          "Registres d’élevage, sanitaire et de production, fiches de poste, modèles.",
+        icon: FileText,
+      },
+      {
+        title: "Conformité & contrôles",
+        href: "/public/conformite",
+        description: "Inspections, audits, assurances et gestion de crise.",
+        icon: ClipboardList,
       },
       {
         title: "Base documentaire",
         href: "/user/base-documentaire",
-        description: "Ressources et modèles (connexion).",
+        description: "Ressources et modèles (connexion requise).",
+        icon: BookOpen,
       },
     ],
   },
   {
     title: "Aide",
-    description: "Support et documentation.",
+    emoji: "💡",
+    colorBack: "bg-indigo-50",
+    description:
+      "Besoin d’assistance ? Retrouvez les guides d’utilisation, la FAQ et les moyens de contacter le support technique PolloMundo.",
     items: [
       {
         title: "Aide application",
         href: "/public/aide",
-        description: "Docs, tutoriels, dépannage.",
+        description: "Tutoriels, guides et dépannage utilisateur.",
+        icon: HelpCircle,
       },
       {
         title: "FAQ",
         href: "/public/faq",
-        description: "Questions fréquentes.",
+        description: "Questions fréquentes et solutions rapides.",
+        icon: ClipboardList,
       },
       {
         title: "Contact",
         href: "/public/contact",
-        description: "Contacter le support.",
+        description: "Contacter le support technique PolloMundo.",
+        icon: Mail,
       },
     ],
   },
 ];
 
-export default function Page() {
+// --------------------
+// Composant principal
+// --------------------
+export const PublicNav: React.FC = () => {
   return (
-    <main style={styles.main}>
-      <section style={styles.grid} aria-label="Navigation pages publiques">
+    <div className="max-w-7xl mx-auto px-6 py-10">
+      <h1 className="text-3xl font-bold text-gray-800 mb-10 text-center">
+        PolloMundo – Guide des Catégories
+      </h1>
+
+      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {PUBLIC_PAGES.map((category) => (
           <div
             key={category.title}
-            style={styles.card}
-            aria-label={`Catégorie ${category.title}`}
+            className={`rounded-2xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition-all ${category.colorBack}`}
           >
-            <div style={styles.cardBody}>
-              <h2 style={styles.h2}>{category.title}</h2>
-              <p style={styles.cardText}>{category.description}</p>
+            <div className="p-6 flex flex-col h-full">
+              <h2 className="text-2xl font-semibold text-gray-800 mb-2 flex items-center gap-2">
+                <span>{category.emoji}</span>
+                {category.title}
+              </h2>
+              <p className="text-gray-600 text-sm mb-4">
+                {category.description}
+              </p>
 
-              <div style={styles.items} aria-label={`Pages ${category.title}`}>
-                {category.items.map((subItem) => (
-                  <Link
-                    key={subItem.href}
-                    href={subItem.href}
-                    style={styles.subLink}
-                  >
-                    <div style={styles.subLinkText}>
-                      <span style={styles.subTitle}>{subItem.title}</span>
-                      <span style={styles.subDesc}>{subItem.description}</span>
-                    </div>
-                    <span style={styles.subCta} aria-hidden="true">
-                      →
-                    </span>
-                  </Link>
-                ))}
+              <div className="space-y-3 mt-auto">
+                {category.items.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <Link
+                      key={item.title}
+                      href={item.href}
+                      className="flex items-start gap-3 group hover:bg-white/40 p-2 rounded-lg transition"
+                    >
+                      {Icon && (
+                        <Icon className="w-5 h-5 text-gray-600 group-hover:text-blue-600 mt-1" />
+                      )}
+                      <div>
+                        <h3 className="text-sm font-medium text-gray-800 group-hover:text-blue-700">
+                          {item.title}
+                        </h3>
+                        {item.description && (
+                          <p className="text-xs text-gray-500">
+                            {item.description}
+                          </p>
+                        )}
+                      </div>
+                    </Link>
+                  );
+                })}
               </div>
             </div>
           </div>
         ))}
-      </section>
-    </main>
+      </div>
+    </div>
   );
-}
-
-const styles: Record<string, React.CSSProperties> = {
-  main: {
-    maxWidth: 1000,
-    margin: "0 auto",
-    padding: "32px 16px",
-    fontFamily:
-      "ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial",
-    lineHeight: 1.5,
-  },
-
-  grid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-    gap: 14,
-    marginTop: 18,
-  },
-
-  card: {
-    border: "1px solid #e5e7eb",
-    borderRadius: 12,
-    padding: 16,
-    background: "#fff",
-    color: "inherit",
-  },
-
-  cardBody: { display: "grid", gap: 10 },
-
-  h2: { margin: 0, fontSize: 18 },
-
-  cardText: { margin: 0, color: "#555" },
-
-  items: {
-    display: "grid",
-    gap: 8,
-    marginTop: 6,
-  },
-
-  subLink: {
-    display: "flex",
-    alignItems: "flex-start",
-    justifyContent: "space-between",
-    gap: 10,
-    padding: "10px 12px",
-    borderRadius: 10,
-    border: "1px solid #f1f5f9",
-    textDecoration: "none",
-    color: "inherit",
-    background: "#fafafa",
-  },
-
-  subLinkText: {
-    display: "grid",
-    gap: 2,
-  },
-
-  subTitle: {
-    fontSize: 14,
-    fontWeight: 600,
-  },
-
-  subDesc: {
-    fontSize: 13,
-    color: "#666",
-  },
-
-  subCta: {
-    fontSize: 16,
-    color: "#111",
-    lineHeight: 1,
-    paddingTop: 2,
-  },
 };
+
+export default PublicNav;
