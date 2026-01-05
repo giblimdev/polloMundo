@@ -48,36 +48,43 @@ export const PUBLIC_PAGES: NavCategory[] = [
       "L’élevage des poules pondeuses est au cœur de la production chez PolloMundo. Cette section vous accompagne à chaque étape : du cycle de vie des poules aux actions clés pour garantir leur santé et leur productivité.",
     items: [
       {
+        title: "Généralités",
+        href: "/public/elevage/intro",
+        description: "Présentation du projet, les race poules",
+        icon: BookOpen,
+      },
+      {
         title: "Guide d’élevage",
-        href: "/public/guide-elevage",
+        href: "/public/elevage/guide-elevage",
         description:
           "Cycle de vie, étapes essentielles et actions clés pour la productivité.",
         icon: BookOpen,
       },
       {
+        title: "Alimentation",
+        href: "/public/elevage/alimentation",
+        description:
+          "Phases alimentaires, gestion de l’eau, stockage et distribution.",
+        icon: Egg,
+      },
+      {
         title: "Conduite en lots",
-        href: "/public/conduite-lots",
+        href: "/public/elevage/conduite-lots",
         description:
           "Gestion des bandes, vide sanitaire et continuité de production.",
         icon: ClipboardList,
       },
       {
         title: "Qualité de l’élevage",
-        href: "/public/qualite-elevage",
+        href: "/public/elevage/qualite-elevage",
         description:
           "Quarantaine, traçabilité, documents et calendrier des lots.",
         icon: FileText,
       },
-      {
-        title: "Alimentation",
-        href: "/public/alimentation",
-        description:
-          "Phases alimentaires, gestion de l’eau, stockage et distribution.",
-        icon: Egg,
-      },
+
       {
         title: "Indicateurs de performance (KPI)",
-        href: "/public/kpi-elevage",
+        href: "/public/elevage/kpi-elevage",
         description: "Suivi des performances et ratios d’élevage.",
         icon: Scale,
       },

@@ -2,7 +2,7 @@ import React from "react";
 import {
   alimentation,
   type AlimentationType,
-} from "@/app/public/guidElevage/alimentationData";
+} from "@/app/public/elevage/guide-elevage/alimentationData";
 import {
   Card,
   CardContent,

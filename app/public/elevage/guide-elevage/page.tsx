@@ -21,7 +21,7 @@ import {
   Clock,
 } from "lucide-react";
 import LifeCycle from "./lifeCycle";
-import AlimentationGuide from "@/app/public/guidElevage/Alimentation";
+import AlimentationGuide from "@/app/public/elevage/guide-elevage/Alimentation";
 //import Amenagement from "./Amenagement";
 
 export default function GuideElevagePage() {
@@ -33,17 +33,11 @@ export default function GuideElevagePage() {
           <h1 className="text-3xl font-bold text-slate-900">
             Guide Technique Élevage
           </h1>
-          <p className="text-slate-500">
-            Référentiel des standards pour poules pondeuses (Lohmann, ISA Brown)
-          </p>
         </div>
 
         <Tabs defaultValue="cycle" className="space-y-6">
           <TabsList className="grid w-full grid-cols-4 lg:w-100">
             <TabsTrigger value="cycle">Cycle de Vie</TabsTrigger>
-            <TabsTrigger value="alimentation">Alimentation</TabsTrigger>
-            <TabsTrigger value="environnement">Environnement</TabsTrigger>
-            <TabsTrigger value="soins">Soins & Santé</TabsTrigger>
           </TabsList>
 
           {/* SECTION : CYCLE DE VIE */}
